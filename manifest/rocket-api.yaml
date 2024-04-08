@@ -1,0 +1,58 @@
+###### API ROCKET #######
+ ## nome do projeto
+ ## quantidade de replicas
+ ## imagem container 
+ ## versao 
+ ## envs
+
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: rocketapis.babidi.operator
+spec:
+  scope: Namespaced
+  group: babidi.operator
+  names:
+    kind: RocketApi
+    plural: rocketapis
+    singular: rocketapi
+    shortNames:
+      - rkapi
+      - rocket
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                name:
+                  type: string
+                replicas:
+                  type: integer
+                  minimum: 1
+                  maximum: 10
+                  default: 1
+                image:
+                  type: string
+                  default: nginx
+                version:
+                  type: string
+                  default: latest
+                node_port:
+                  type: integer
+                  minimum: 30000
+                  maximum: 32767
+                  default: 30000
+                # envs:
+                #   type: array
+              required:
+              - name
+              - replicas
+              - image
+              - version
+             # - envs

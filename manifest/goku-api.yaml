@@ -1,0 +1,11 @@
+apiVersion: babidi.operator/v1
+kind: RocketApi
+metadata:
+  name: goku-api
+  namespace: tech
+spec:
+  name: gohan-api
+  replicas: 10
+  image: nginx
+  version: latest
+  node_port: 30006
